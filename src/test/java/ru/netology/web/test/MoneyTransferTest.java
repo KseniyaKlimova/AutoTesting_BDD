@@ -52,4 +52,18 @@ public class MoneyTransferTest {
         Assertions.assertEquals(expectedSecondCardBalanceAfter, dashboardPage.getCardBalance(getSecondCardNumber().getCardNumber()));
     }
 
+    @Test
+    void shouldGetErrorMessageIfAmountMoreThanBalance() {
+        var LoginPage = new LoginPage();
+        var authInfo = DataHelper.getAuthInfo();
+        var verificationPage = LoginPage.validLogin(authInfo);
+        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        var dashboardPage = verificationPage.validVerify(verificationCode);
+        var secondCardBalance = dashboardPage.getCardBalance(getSecondCardNumber().getCardNumber());
+        var transferPage = dashboardPage.depositToFirstCard();
+        int amount = DataHelper.generateInvalidAmount(secondCardBalance);
+        transferPage.transferMoney(amount, DataHelper.getSecondCardNumber());
+        transferPage.amountMoreThanBalance();
+    }
+
 }
