@@ -22,6 +22,6 @@ public class MoneyTransferPage {
     }
 
     public void amountMoreThanBalance() {
-        $(byText("Невозможно осуществить перевод, так как сумма превышает баланс.")).shouldBe(visible);
+        $(byText("Введенная сумма превышает баланс! Перевод невозможен!")).shouldBe(visible);
     }
 }

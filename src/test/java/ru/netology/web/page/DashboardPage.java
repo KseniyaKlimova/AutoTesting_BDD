@@ -35,4 +35,9 @@ public class DashboardPage {
         transferButton1.click();
         return new MoneyTransferPage();
     }
+
+    public MoneyTransferPage depositToSecondCard() {
+        transferButton2.click();
+        return new MoneyTransferPage();
+    }
 }
